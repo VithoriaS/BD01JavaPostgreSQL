@@ -4,11 +4,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Usuario;
+import model.Professor;
 
-public class UsuarioDAO extends DAO {
+public class ProfessoroDAO extends DAO {
 	
-	public UsuarioDAO() {
+	public ProfessoroDAO() {
 		super();
 		conectar();
 	}
@@ -18,7 +18,7 @@ public class UsuarioDAO extends DAO {
 	}
 	
 	
-	public boolean insert(Usuario usuario) {
+	public boolean insert(Professor usuario) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
@@ -36,8 +36,8 @@ public class UsuarioDAO extends DAO {
 	}
 
 	
-	public Usuario get(int codigo) {
-		Usuario usuario = null;
+	public Professor get(int codigo) {
+		Professor usuario = null;
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -45,7 +45,7 @@ public class UsuarioDAO extends DAO {
 			System.out.println(sql);
 			ResultSet rs = st.executeQuery(sql);	
 	        if(rs.next()){            
-	        	 usuario = new Usuario(rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0));
+	        	 usuario = new Professor(rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0));
 	        }
 	        st.close();
 		} catch (Exception e) {
@@ -55,29 +55,29 @@ public class UsuarioDAO extends DAO {
 	}
 	
 	
-	public List<Usuario> get() {
+	public List<Professor> get() {
 		return get("");
 	}
 
 	
-	public List<Usuario> getOrderByCodigo() {
+	public List<Professor> getOrderByCodigo() {
 		return get("codigo");		
 	}
 	
 	
-	public List<Usuario> getOrderByLogin() {
+	public List<Professor> getOrderByLogin() {
 		return get("login");		
 	}
 	
 	
-	public List<Usuario> getOrderBySexo() {
+	public List<Professor> getOrderBySexo() {
 		return get("sexo");		
 	}
 	
 	
-	private List<Usuario> get(String orderBy) {	
+	private List<Professor> get(String orderBy) {	
 	
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+		List<Professor> usuarios = new ArrayList<Professor>();
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -85,7 +85,7 @@ public class UsuarioDAO extends DAO {
 			System.out.println(sql);
 			ResultSet rs = st.executeQuery(sql);	           
 	        while(rs.next()) {	            	
-	        	Usuario u = new Usuario(rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0));
+	        	Professor u = new Professor(rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0));
 	            usuarios.add(u);
 	        }
 	        st.close();
@@ -96,8 +96,8 @@ public class UsuarioDAO extends DAO {
 	}
 
 
-	public List<Usuario> getSexoMasculino() {
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+	public List<Professor> getSexoMasculino() {
+		List<Professor> usuarios = new ArrayList<Professor>();
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -105,7 +105,7 @@ public class UsuarioDAO extends DAO {
 			System.out.println(sql);
 			ResultSet rs = st.executeQuery(sql);	           
 	        while(rs.next()) {	            	
-	        	Usuario u = new Usuario(rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0));
+	        	Professor u = new Professor(rs.getInt("codigo"), rs.getString("login"), rs.getString("senha"), rs.getString("sexo").charAt(0));
 	            usuarios.add(u);
 	        }
 	        st.close();
@@ -116,7 +116,7 @@ public class UsuarioDAO extends DAO {
 	}
 	
 	
-	public boolean update(Usuario usuario) {
+	public boolean update(Professor usuario) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
